@@ -1,0 +1,66 @@
+Microsoft (R) Macro Assembler Version 5.00                  4/15/17 19:07:48
+                                                             Page     1-1
+
+
+       1 0000				code segment 
+       2				        assume cs:code 
+       3 0000  B4 01			  begin:mov ah,1 
+       4 0002  CD 21			        int 21h    ;input from screen(a
+					l) 
+       5 0004  3C 24			        cmp al,24h ;'$' 
+       6 0006  74 1A			        jz exit 
+       7				 
+       8 0008  3C 41			        cmp al,41h ;'A' 
+       9 000A  72 0E			        jb output ;<'A' 
+      10 000C  3C 5A			        cmp al,5Ah ;'Z' 
+      11 000E  76 08			        jna operator ;'A'~'Z' 
+      12 0010  3C 61			        cmp al,61h ;'a' 
+      13 0012  72 06			        jb output ;>'Z' and <'a' 
+      14 0014  3C 7A			        cmp al,7Ah ;'z' 
+      15 0016  77 02			        ja output ;>'z' 
+      16				                  ;left 'a'~'z' 
+      17 0018				operator: ;'A'~'Z' and 'a'~'z' 
+      18 0018  34 20			        xor al,00100000B 
+      19 001A  8A D0			 output:mov dl,al 
+      20 001C  B4 02			        mov ah,2    
+      21 001E  CD 21			        int 21h    ;output from screen(
+					dl) 
+      22 0020  E2 DE			        loop begin 
+      23				 
+      24 0022  B4 4C			   exit:mov ah,4Ch 
+      25 0024  CD 21			        int 21h 
+      26				 
+      27 0026				code ends 
+      28				        end begin 
+Microsoft (R) Macro Assembler Version 5.00                  4/15/17 19:07:48
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	0026	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BEGIN  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+
+EXIT . . . . . . . . . . . . . .  	L NEAR	0022	CODE
+
+OPERATOR . . . . . . . . . . . .  	L NEAR	0018	CODE
+OUTPUT . . . . . . . . . . . . .  	L NEAR	001A	CODE
+
+@FILENAME  . . . . . . . . . . .  	TEXT  6		
+
+
+     28 Source  Lines
+     28 Total   Lines
+      7 Symbols
+
+  50710 + 465834 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

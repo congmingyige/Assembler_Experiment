@@ -1,0 +1,66 @@
+Microsoft (R) Macro Assembler Version 5.00                  4/14/17 15:52:20
+                                                             Page     1-1
+
+
+       1 0000				code segment 
+       2				 
+       3				 
+       4				assume cs:code 
+       5 0000  B4 01			  begin:mov ah,1 
+       6 0002  CD 21			        int 21h 
+       7				        ;when input '$' output 
+       8 0004  3C 24			        cmp al,'$' 
+       9 0006  74 12			        jz exit 
+      10 0008  3C 60			        cmp al,96 
+      11 000A  77 02			        JA lowercase ;'a'~'z' 
+      12 000C  72 06			        JB uppercase ;'A'~'Z' 
+      13				        exit 
+5.ASM(13): error A2105: Expected: instruction or directive
+      14 000E				lowercase: ;change to lowercase 
+      15				        and 11011111 
+5.ASM(15): error A2029: Division by 0 or overflow
+      16				        exit 
+5.ASM(16): error A2105: Expected: instruction or directive
+      17				uppercase: ;change to uppercase 
+5.ASM(17): error A2006: Phase error between passes
+      18				        or  00100000 
+5.ASM(18): error A2029: Division by 0 or overflow
+      19 001A  B4 4C			   exit:mov ah,4ch 
+5.ASM(19): error A2006: Phase error between passes
+      20 001C  CD 21			        int 21h 
+      21				                                
+      22 001E				code ends 
+      23				        end begin 
+Microsoft (R) Macro Assembler Version 5.00                  4/14/17 15:52:20
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODE . . . . . . . . . . . . . .  	001E	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+BEGIN  . . . . . . . . . . . . .  	L NEAR	0000	CODE
+
+EXIT . . . . . . . . . . . . . .  	L NEAR	001A	CODE
+
+LOWERCASE  . . . . . . . . . . .  	L NEAR	000E	CODE
+
+UPPERCASE  . . . . . . . . . . .  	L NEAR	0014	CODE
+
+@FILENAME  . . . . . . . . . . .  	TEXT  5		
+
+
+     23 Source  Lines
+     23 Total   Lines
+      7 Symbols
+
+  49740 + 416596 Bytes symbol space free
+
+      0 Warning Errors
+      6 Severe  Errors
